@@ -1,0 +1,29 @@
+﻿using global::StudieøktBackend.Data;
+using global::StudieøktBackend.Model.Entities;
+using global::StudieøktBackend.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace StudieøktBackend.Repositories
+{
+    public class SubjectRepository : ISubjectRepository
+    {
+        private readonly AppDbContext _context;
+
+        public SubjectRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<Subject>> GetAllAsync()
+        {
+            return await _context.Subjects.ToListAsync();
+        }
+
+        public async Task<Subject?> AddAsync(Subject subject)
+        {
+            _context.Subjects.Add(subject);
+            await _context.SaveChangesAsync();
+            return subject;
+        }
+    }
+}
