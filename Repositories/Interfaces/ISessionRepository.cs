@@ -6,5 +6,7 @@ namespace StudieøktBackend.Repositories.Interfaces
     {
         Task<Session> AddAsync(Session session);
         Task<List<Session>> GetByDateAsync(DateOnly date);
+        Task<Session?> GetByIdAsync(int id);
+        Task DeleteAsync(Session session);
     }
 }

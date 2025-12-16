@@ -7,5 +7,8 @@ namespace StudieøktBackend.Repositories.Interfaces
         Task<List<Subject>> GetAllAsync();
         Task<Subject?> AddAsync(Subject subject);
         Task<List<Subject>> GetByDateAsync(DateOnly date);
+        Task<Subject?> GetByIdAsync(int id);
+        Task DeleteAsync(Subject subject);
+        Task<bool> SaveChangesAsync();
     }
 }

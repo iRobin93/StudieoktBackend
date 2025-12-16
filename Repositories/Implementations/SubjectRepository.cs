@@ -26,6 +26,23 @@ namespace StudieøktBackend.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Subject?> GetByIdAsync(int id)
+        {
+            return await _context.Subjects
+                .Include(s => s.Sessions)
+                .FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task DeleteAsync(Subject subject)
+        {
+            _context.Subjects.Remove(subject);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync()) > 0;
+        }
+
         public async Task<Subject?> AddAsync(Subject subject)
         {
             _context.Subjects.Add(subject);

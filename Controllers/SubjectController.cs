@@ -40,5 +40,16 @@ namespace StudieøktBackend.Controllers
 
             return CreatedAtAction(nameof(GetSubjects), new { id = created.Id }, created);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSubject(int id)
+        {
+            var success = await _subjectService.DeleteSubjectAsync(id);
+            if (!success)
+                return NotFound();
+
+            return NoContent(); // 204 is more correct for DELETE
+        }
+
     }
 }

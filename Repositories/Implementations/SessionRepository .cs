@@ -33,6 +33,17 @@ namespace StudieøktBackend.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Session?> GetByIdAsync(int id)
+        {
+            return await _context.Sessions.FindAsync(id);
+        }
+
+        public async Task DeleteAsync(Session session)
+        {
+            _context.Sessions.Remove(session);
+            await _context.SaveChangesAsync();
+        }
+
     }
 
 }

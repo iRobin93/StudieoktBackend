@@ -26,4 +26,13 @@ public class SessionController : ControllerBase
         var sessions = await _sessionService.GetByDateAsync(date);
         return Ok(sessions);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteSession(int id)
+    {
+        var success = await _sessionService.DeleteSessionById(id);
+        if (!success)
+            return NotFound();
+        return NoContent();
+    }
 }

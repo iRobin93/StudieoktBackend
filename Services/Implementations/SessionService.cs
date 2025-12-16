@@ -1,5 +1,7 @@
-﻿using StudieøktBackend.Model.DTOs;
+﻿using AutoMapper;
+using StudieøktBackend.Model.DTOs;
 using StudieøktBackend.Model.Entities;
+using StudieøktBackend.Repositories;
 using StudieøktBackend.Repositories.Interfaces;
 using StudieøktBackend.Services.Interfaces;
 
@@ -7,11 +9,13 @@ namespace StudieøktBackend.Services
 {
     public class SessionService : ISessionService
     {
-        private readonly ISessionRepository _repository;
+        private readonly ISessionRepository _sessionRepository;
+        private readonly IMapper _mapper;
 
-        public SessionService(ISessionRepository repository)
+        public SessionService(ISessionRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _sessionRepository = repository;
+            _mapper = mapper;
         }
 
         public async Task<Session> CreateAsync(CreateSessionDTO dto)
@@ -26,12 +30,24 @@ namespace StudieøktBackend.Services
                 StartedAt = dto.StartedAt
             };
 
-            return await _repository.AddAsync(session);
+            return await _sessionRepository.AddAsync(session);
         }
 
-        public async Task<List<Session>> GetByDateAsync(DateOnly date)
+        public async Task<List<GetSessionDTO>> GetByDateAsync(DateOnly date)
         {
-            return await _repository.GetByDateAsync(date);
+
+            var sessions = await _sessionRepository.GetByDateAsync(date);
+
+            return _mapper.Map<List<GetSessionDTO>>(sessions);
+        }
+        public async Task<bool> DeleteSessionById(int id)
+        {
+            var session = await _sessionRepository.GetByIdAsync(id);
+            if (session == null)
+                return false;
+
+            await _sessionRepository.DeleteAsync(session);
+            return true;
         }
     }
 }

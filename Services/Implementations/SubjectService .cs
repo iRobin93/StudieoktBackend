@@ -48,5 +48,14 @@ namespace StudieøktBackend.Services
 
             return await _repository.AddAsync(subject);
         }
+
+        public async Task<bool> DeleteSubjectAsync(int id)
+        {
+            var subject = await _repository.GetByIdAsync(id);
+            if (subject == null) return false;
+
+            await _repository.DeleteAsync(subject);
+            return await _repository.SaveChangesAsync();
+        }
     }
 }
