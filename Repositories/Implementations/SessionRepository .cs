@@ -23,11 +23,16 @@ namespace StudieøktBackend.Repositories
 
         public async Task<List<Session>> GetByDateAsync(DateOnly date)
         {
+            var start = date.ToDateTime(TimeOnly.MinValue);
+            var end = date.ToDateTime(TimeOnly.MaxValue);
+
             return await _context.Sessions
                 .Include(s => s.Subject)
-                .Where(s => DateOnly.FromDateTime(s.StartedAt) == date)
+                .Where(s => s.StartedAt >= start && s.StartedAt <= end)
+                .OrderBy(s => s.StartedAt)
                 .ToListAsync();
         }
+
     }
 
 }

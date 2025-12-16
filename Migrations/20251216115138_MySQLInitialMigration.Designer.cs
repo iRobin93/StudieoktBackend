@@ -12,8 +12,8 @@ using StudieøktBackend.Data;
 namespace StudieøktBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251215171730_AddSessions")]
-    partial class AddSessions
+    [Migration("20251216115138_MySQLInitialMigration")]
+    partial class MySQLInitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,8 @@ namespace StudieøktBackend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StartedAt");
 
                     b.HasIndex("SubjectId");
 

@@ -53,6 +53,11 @@ namespace StudieøktBackend.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sessions_StartedAt",
+                table: "Sessions",
+                column: "StartedAt");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sessions_SubjectId",
                 table: "Sessions",
                 column: "SubjectId");

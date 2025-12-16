@@ -41,6 +41,8 @@ namespace StudieøktBackend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StartedAt");
+
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Sessions");

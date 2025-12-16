@@ -18,7 +18,12 @@ namespace StudieøktBackend.Data
                 .WithMany(s => s.Sessions)
                 .HasForeignKey(s => s.SubjectId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Session>()
+                .HasIndex(s => s.StartedAt);
         }
+
+
 
     }
 }
