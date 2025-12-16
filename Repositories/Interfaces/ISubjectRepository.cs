@@ -6,5 +6,6 @@ namespace StudieøktBackend.Repositories.Interfaces
     {
         Task<List<Subject>> GetAllAsync();
         Task<Subject?> AddAsync(Subject subject);
+        Task<List<Subject>> GetByDateAsync(DateOnly date);
     }
 }

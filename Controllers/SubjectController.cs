@@ -23,6 +23,13 @@ namespace StudieøktBackend.Controllers
             return Ok(subjects);
         }
 
+        // GET /subject/bydate
+        [HttpGet("bydate/{date}")]
+        public async Task<ActionResult<List<Subject>>> GetSubjectsByDate(DateOnly date)
+        {
+            var subjects = await _subjectService.GetSubjectsByDateAsync(date);
+            return Ok(subjects);
+        }
         // POST /subject
         [HttpPost]
         public async Task<ActionResult<Subject>> AddSubject([FromBody] Subject subject)

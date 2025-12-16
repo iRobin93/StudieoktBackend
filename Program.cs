@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using StudieøktBackend.Data;
+using StudieøktBackend.Mapping;
 using StudieøktBackend.Repositories;
 using StudieøktBackend.Repositories.Interfaces;
 using StudieøktBackend.Services;
@@ -25,15 +27,20 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
         policy.WithOrigins("http://localhost:5173",
-        "https://irobin93.github.io/StudieoktFrontend")
+        "https://irobin93.github.io/StudieoktFrontend/")
 
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
 
 
-
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<MappingProfile>();
+});
 builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
+builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
 
 

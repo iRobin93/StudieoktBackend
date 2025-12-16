@@ -1,4 +1,5 @@
-﻿using StudieøktBackend.Model.Entities;
+﻿using StudieøktBackend.Model.DTOs;
+using StudieøktBackend.Model.Entities;
 
 namespace StudieøktBackend.Services.Interfaces
 {
@@ -6,5 +7,6 @@ namespace StudieøktBackend.Services.Interfaces
     {
         Task<List<Subject>> GetAllSubjectsAsync();
         Task<Subject?> CreateSubjectAsync(Subject subject);
+        Task<List<GetSubjectByDateDTO>> GetSubjectsByDateAsync(DateOnly date);
     }
 }

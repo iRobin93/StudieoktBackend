@@ -18,6 +18,13 @@ namespace StudieøktBackend.Repositories
         {
             return await _context.Subjects.ToListAsync();
         }
+        public async Task<List<Subject>> GetByDateAsync(DateOnly date)
+        {
+            return await _context.Subjects
+                .Include(s => s.Sessions
+                    .Where(sess => DateOnly.FromDateTime(sess.StartedAt) == date))
+                .ToListAsync();
+        }
 
         public async Task<Subject?> AddAsync(Subject subject)
         {
